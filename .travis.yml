@@ -1,0 +1,21 @@
+language: node_js
+node_js:
+  - '8'
+# операционная система
+dist: trusty
+services:
+  - mondodb
+  - redis-server
+env:
+  - NODE_ENV=ci PORT=3000
+cache:
+  derictories:
+    - node_modules
+    - client/node_modules
+install:
+  - npm install
+  - npm run build
+script: 
+  - nohup npm run start &
+  - sleep 3
+  - npm run test
